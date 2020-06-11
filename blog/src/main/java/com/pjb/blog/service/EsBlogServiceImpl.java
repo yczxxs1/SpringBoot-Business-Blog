@@ -62,13 +62,13 @@ public class EsBlogServiceImpl implements EsBlogService {
 
 	@Override
 	public Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable){
-		Sort sort = new Sort(Direction.DESC,"createTime");
+		Sort sort = Sort.by(Direction.DESC,"createTime");
 		return esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword,keyword,keyword,keyword, pageSort(pageable,sort));
 	}
 
 	@Override
 	public Page<EsBlog> listHotestEsBlogs(String keyword, Pageable pageable){
-		Sort sort = new Sort(Direction.DESC,"readSize","commentSize","voteSize","createTime");
+		Sort sort = Sort.by(Direction.DESC,"readSize","commentSize","voteSize","createTime");
 		return esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageSort(pageable,sort));
 	}
 
